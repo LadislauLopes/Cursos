@@ -1,0 +1,203 @@
+{% include 'components/header.html' with title='Projetos DITEC' desc_proj=True %}
+
+<body>
+    {% include 'components/navbar.html' %}
+
+    <div class="container mt-5 mb-5">
+        <div class="text-center mb-4">
+            <h1 class="display-4">{{ projeto.nome_projeto }}</h1>
+        </div>
+
+        <div class="card shadow-sm p-4 mb-4">
+            <h5 class="card-title">Detalhes do Projeto</h5>
+            <div class="row mb-2">
+                <div class="col-md-6">
+                    <p><strong>Data início do projeto:</strong> {{ projeto.data_inicio }}</p>
+                </div>
+                <div class="col-md-6">
+                    <p><strong>Data final do projeto:</strong> {{ projeto.data_fim }}</p>
+                </div>
+            </div>
+            <div class="mb-2">
+                <p><strong>N° do Processo SEI:</strong> {{ projeto.processo_sei }}</p>
+            </div>
+            <div>
+                <p><strong>Observações:</strong> {{ projeto.observacoes }}</p>
+            </div>
+            <div>
+                <p><strong>Equipe:</strong></p>
+                <ul>
+                    {% for colaborador in equipe %}
+                        <li>{{ colaborador.id_colaborador.nome }} - {{ colaborador.id_colaborador.id_cargo.nome }}</li>
+                    {% empty %}
+                        <p class="text-muted">Não há colaboradores associados a esta equipe.</p>
+                    {% endfor %}
+                </ul>
+                <button type="button" class="btn btn-secondary mt-3" data-bs-toggle="modal" data-bs-target="#mudarEquipeModal">
+                    Mudar Equipe
+                </button>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Documentos Section -->
+            <div class="col-md-6">
+                <div class="card shadow-sm p-4 mb-4 same-height">
+                    <h5 class="card-title">Documentos</h5>
+                    <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal"
+                        data-bs-target="#documentosModal">
+                        Ver documentos
+                    </button>
+                    <br>
+                    <br>
+                    <h5 class="card-title">Tarefas</h5>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#tarefaModal"
+                        data-id="{{ projeto.id_projeto }}">Ver Tarefa</button>
+                </div>
+
+            </div>
+
+            <!-- Adicionar Documentos Section -->
+            <div class="col-md-6">
+                <div class="card shadow-sm p-4 mb-4 same-height">
+                    <h5 class="card-title">Adicionar Novos Documentos</h5>
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="upload" class="form-label">Selecionar Arquivos:</label>
+                            <input type="file" name="upload" id="upload" class="form-control" multiple required>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Enviar Documentos</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-4 align-items-center">
+            <a href="/ver_projetos/" class="btn btn-primary w-100">Voltar</a>
+        </div>
+    </div>
+
+    <!-- Modal para Exibir Documentos -->
+    <div class="modal fade" id="documentosModal" tabindex="-1" aria-labelledby="documentosModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="documentosModalLabel">Documentos</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        {% for doc in documentos %}
+                        <div class="col-md-6 mb-3">
+                            <div class="border rounded p-3">
+                                <strong>{{ doc.title }}</strong><br>
+                                <a href="{{ doc.upload.url }}" class="text-decoration-none">Baixar</a><br>
+                                <small class="text-muted">Enviado em: {{ doc.uploaded_at }}</small>
+                            </div>
+                        </div>
+                        {% empty %}
+                        <p class="text-muted">Não há documentos disponíveis para este projeto.</p>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal de Tarefas -->
+    <div class="modal fade" id="tarefaModal" tabindex="-1" aria-labelledby="tarefaModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="tarefaModalLabel">Escolha a Visualização</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Selecione uma das opções de visualização para as tarefas:</p>
+                    <div class="list-group">
+                        <a href="{% url 'lista' projeto.id_projeto %}" class="list-group-item list-group-item-action">
+                            Visualização em Lista
+                        </a>
+                        <a href="{% url 'kanban' projeto.id_projeto %}" class="list-group-item list-group-item-action">
+                            Visualização em Quadro Kanban
+                        </a>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal para Gerenciar Equipe -->
+    <div class="modal fade" id="mudarEquipeModal" tabindex="-1" aria-labelledby="mudarEquipeModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="mudarEquipeModalLabel">Gerenciar Equipe</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h6>Colaboradores na Equipe</h6>
+                    <ul class="list-group">
+                        {% for colaborador in equipe %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            {{ colaborador.id_colaborador.nome }}
+                            <a href="{% url 'remover_colaborador' colaborador.id_equipe %}"
+                                class="btn btn-danger btn-sm">
+                                Remover
+                            </a>
+                        </li>
+                        {% empty %}
+                        <p class="text-muted">Nenhum colaborador atribuído a esta equipe.</p>
+                        {% endfor %}
+                    </ul>
+                    <hr>
+
+                    <!-- Formulário para adicionar novos colaboradores -->
+                    <h6><strong>Adicionar Colaboradores</strong></h6>
+                    <div class="modal-footer">
+                        <a type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="location.href='/cad_equipe'">Adicionar colaborador</a>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+    {% include 'components/footer.html' %}
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+
+    <!-- Script para passar o id do projeto para o modal -->
+    <script>
+        // Seleciona todos os botões que abrem o modal
+        var tarefaButtons = document.querySelectorAll('[data-bs-toggle="modal"]');
+
+        tarefaButtons.forEach(function (button) {
+            button.addEventListener('click', function () {
+                var projetoId = button.getAttribute('data-id');
+
+                // Atualiza os links dentro do modal com o ID do projeto
+                var kanbanLink = document.querySelector('#tarefaModal a[href="{% url 'kanban' 0 %}"]');
+                var listaLink = document.querySelector('#tarefaModal a[href="{% url 'lista' 0 %}"]');
+
+                // Atualiza os hrefs para incluir o ID do projeto
+                if (kanbanLink) {
+                    kanbanLink.setAttribute('href', '/kanban/' + projetoId);
+                }
+                if (listaLink) {
+                    listaLink.setAttribute('href', '/lista/' + projetoId);
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>

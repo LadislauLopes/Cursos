@@ -1,0 +1,61 @@
+Inserts
+
+INSERT INTO central_de_projetos_eixo (nome_eixo) VALUES ('I – Governança e Gestão de TIC');
+INSERT INTO central_de_projetos_eixo (nome_eixo) VALUES ('II – Segurança da Informação e Proteção de Dados');
+INSERT INTO central_de_projetos_eixo (nome_eixo) VALUES ('III – Desenvolvimento de Soluções e Aplicações');
+INSERT INTO central_de_projetos_eixo (nome_eixo) VALUES ('IV – Infraestrutura e Serviços');
+
+
+INSERT INTO central_de_projetos_objetivo (nome_objetivo) VALUES ('Objetivo 1: Aumentar a Satisfação dos Usuários do Sistema Judiciário');
+INSERT INTO central_de_projetos_objetivo (nome_objetivo) VALUES ('Objetivo 2: Promover a Transformação Digital');
+INSERT INTO central_de_projetos_objetivo (nome_objetivo) VALUES ('Objetivo 3: Reconhecer e Desenvolver as Competências dos Colaboradores');
+INSERT INTO central_de_projetos_objetivo (nome_objetivo) VALUES ('Objetivo 4: Buscar a Inovação de Forma Colaborativa');
+INSERT INTO central_de_projetos_objetivo (nome_objetivo) VALUES ('Objetivo 5: Aperfeiçoar a Governança e a Gestão');
+INSERT INTO central_de_projetos_objetivo (nome_objetivo) VALUES ('Objetivo 6: Aprimorar as Aquisições e Contratações');
+INSERT INTO central_de_projetos_objetivo (nome_objetivo) VALUES ('Objetivo 7: Aprimorar a Segurança da Informação e a Gestão de Dados');
+INSERT INTO central_de_projetos_objetivo (nome_objetivo) VALUES ('Objetivo 8: Promover Serviços de Infraestrutura e Soluções Corporativas');
+
+
+INSERT INTO central_de_projetos_status (nome_status) VALUES ('PENDENTE');
+INSERT INTO central_de_projetos_status (nome_status) VALUES ('EM ANDAMENTO');
+INSERT INTO central_de_projetos_status (nome_status) VALUES ('CONCLUIDO');
+INSERT INTO central_de_projetos_status (nome_status) VALUES ('CANCELADO');
+
+
+
+INSERT INTO central_de_projetos_prioridade (nome_prioridade) VALUES ('ALTA');
+INSERT INTO central_de_projetos_prioridade (nome_prioridade) VALUES ('MEDIA');
+INSERT INTO central_de_projetos_prioridade (nome_prioridade) VALUES ('BAIXA');
+INSERT INTO central_de_projetos_prioridade (nome_prioridade) VALUES ('URGENTE');
+
+Gerencia:
+INSERT INTO central_de_projetos_gerencia (nome) VALUES ('GERENTE');
+INSERT INTO central_de_projetos_gerencia (nome) VALUES ('GABINETE DA DIRETORIA DE TECNOLOGIA DA INFORMAÇÃO E COMUNICAÇÃO');
+INSERT INTO central_de_projetos_gerencia (nome) VALUES ('GERÊNCIA DE SISTEMAS');
+INSERT INTO central_de_projetos_gerencia (nome) VALUES ('GERÊNCIA DE SEGURANÇA DA INFORMAÇÃO');
+INSERT INTO central_de_projetos_gerencia (nome) VALUES ('GERÊNCIA DE REDES');
+INSERT INTO central_de_projetos_gerencia (nome) VALUES ('GERÊNCIA DE SERVIÇOS DE TI');
+INSERT INTO central_de_projetos_gerencia (nome) VALUES ('NÚCLEO DE SUPORTE E ANÁLISE DE NEGÓCIO - NUSAN');
+
+
+INSERT INTO central_de_projetos_cargo (nome) VALUES ('DIVERSOS');
+INSERT INTO central_de_projetos_cargo (nome) VALUES ('ASSESSOR TÉCNICO CJ5-PJ');
+INSERT INTO central_de_projetos_cargo (nome) VALUES ('SECRETÁRIO DE PRECATÓRIOS CJ5-PJ');
+INSERT INTO central_de_projetos_cargo (nome) VALUES ('ASSESSOR CJ6-PJ');
+INSERT INTO central_de_projetos_cargo (nome) VALUES ('GERENTE DE REDES CJ4-PJ');
+INSERT INTO central_de_projetos_cargo (nome) VALUES ('TÉCNICO JUDICIÁRIO - EJ02-NM');
+INSERT INTO central_de_projetos_cargo (nome) VALUES ('ASSESSOR TECNICO - CJ5-PJ');
+INSERT INTO central_de_projetos_cargo (nome) VALUES ('GERENTE DE SEGURANÇA DA INFORMAÇÃO - CJ4-PJ');
+INSERT INTO central_de_projetos_cargo (nome) VALUES ('GERENTE DE SERVIÇOS CJ4-PJ');
+INSERT INTO central_de_projetos_cargo (nome) VALUES ('FUNÇAO DE CONFIANÇA FC3-PJ');
+INSERT INTO central_de_projetos_cargo (nome) VALUES ('FUNÇAO DE CONFIANÇA  FC1-PJ');
+INSERT INTO central_de_projetos_cargo (nome) VALUES ('FUNÇÃO DE CONFIANÇA - FC-E-PJ (LC Nº 442/2023)');
+INSERT INTO central_de_projetos_cargo (nome) VALUES ('DIRETOR DE TECNOLOGIA DA INFORMAÇAO CJ1-PJ');
+INSERT INTO central_de_projetos_cargo (nome) VALUES ('ANALISTA JUDICIÁRIO - EJ01-NS');
+INSERT INTO central_de_projetos_cargo (nome) VALUES ('DIRETOR GERAL (CJD-PJ)');
+INSERT INTO central_de_projetos_cargo (nome) VALUES ('ESTAGIÁRIO');
+INSERT INTO central_de_projetos_cargo (nome) VALUES ('VOLUNTÁRIO');
+INSERT INTO central_de_projetos_cargo (nome) VALUES ('GERENTE DE SISTEMAS CJ4-PJ');
+INSERT INTO central_de_projetos_cargo (nome) VALUES ('ESTAGIARIO (PÓS-GRADUACAO)');
+
+

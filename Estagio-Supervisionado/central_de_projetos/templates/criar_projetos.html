@@ -1,0 +1,97 @@
+{% include 'components/header.html' with title='Projetos DITEC' cadastro_projeto=True %}
+
+<body>
+{% include 'components/navbar.html' %}
+
+    <div class="container mt-5 cadastro-box">
+        <h2 class="text-center mb-4">Cadastro de Projeto</h2>
+
+        {% if messages %}
+        <div class="container mt-3">
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert" id="message-alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endfor %}
+        </div>
+
+        <script>
+            // Temporizador para remover a mensagem após 5 segundos
+            setTimeout(function () {
+                var alert = document.getElementById('message-alert');
+                if (alert) {
+                    alert.classList.remove('show');
+                    alert.classList.add('fade');
+                    setTimeout(function () {
+                        alert.remove();
+                    }, 500);  // Tempo do fade-out
+                }
+            }, 5000);  // 5 segundos
+        </script>
+        {% endif %}
+
+        <form action="{% url 'projeto' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <div class="mb-3">
+                <label for="{{ form.nome_projeto.id_for_label }}" class="form-label">Nome do Projeto</label>
+                {{ form.nome_projeto }}
+            </div>
+
+            <div class="mb-3">
+                <label for="{{ form.processo_sei.id_for_label }}" class="form-label"> Nº do processo SEI</label>
+                {{ form.processo_sei }}
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="{{ form.data_inicio.id_for_label }}" class="form-label">Data de Início</label>
+                    {{ form.data_inicio }}
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label for="{{ form.data_fim.id_for_label }}" class="form-label">Data de Término</label>
+                    {{ form.data_fim }}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="{{ form.id_eixo.id_for_label }}" class="form-label">Eixo:</label>
+                    {{ form.id_eixo }}
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label for="{{ form.id_objetivo.id_for_label }}" class="form-label">Objetivo:</label>
+                    {{ form.id_objetivo }}
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="{{ form.observacoes.id_for_label }}" class="form-label">Observações</label>
+                {{ form.observacoes }}
+            </div>
+
+            <div class="mb-3">
+                <label for="documentos" class="form-label">Upload de Documentos</label>
+                <input type="file" name="documentos" id="documentos" multiple class="form-control">
+            </div>
+
+            <div class="mb-4 align-items-center">
+                <button type="button" class="btn btn-primary btn-projeto" onclick="location.href='/home_page'">Cancelar</button>
+                <button type="submit" class="btn btn-primary btn-projeto-save">Salvar Projeto</button>
+            </div>
+        </form>
+    </div>
+
+{% include 'components/footer.html' %}
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous">
+    </script>
+</body>
+
+</html>

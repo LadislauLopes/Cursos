@@ -1,0 +1,141 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2vh;
+    padding: 2vh 0;
+}
+
+
+.card-link {
+    text-decoration: none;
+    color: inherit;
+    display: inline-block;
+    width: 80%;
+    max-width: 1000px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-link:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+
+.card-projeto {
+    height: 15vh;
+    max-height: 200px;
+    min-height: 70px;
+    border: 1px solid rgb(172, 172, 172);
+    border-radius: 10px;
+    padding: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: left;
+    position: relative;
+}
+
+
+.task-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2px;
+    position: absolute;
+    right: 60px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2em;
+    color: gray;
+}
+
+.task-label {
+    font-weight: bold;
+    font-size: 0.8em;
+}
+
+.task-value {
+    color: rgb(100, 100, 100);
+    font-size: 1em;
+}
+
+
+.card-projeto::after {
+    content: "";
+    border: solid gray;
+    border-width: 0 4px 4px 0;
+    display: inline-block;
+    padding: 8px;
+    transform: rotate(-45deg);
+    transition: transform 0.3s ease;
+    margin-left: 10px;
+}
+
+.card-projeto:hover::after {
+    transform: rotate(-45deg) scale(1.2);
+}
+
+
+@media (max-width: 768px) {
+    .card-projeto {
+        height: 12vh;
+        padding: 15px;
+    }
+
+    .task-info {
+        right: 20px;
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 576px) {
+    .container {
+        padding: 0 15px;
+    }
+
+    .card-projeto {
+        width: 100%;
+        height: auto;
+        padding: 10px;
+        flex-direction: column;
+        align-items: flex-start;
+        position: relative;
+    }
+
+    .task-info {
+        position: static;
+        align-items: flex-start;
+        font-size: 0.9em;
+        margin-top: 10px;
+    }
+
+    .card-link {
+        width: 100%;
+        padding: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .card-projeto {
+        height: 10vh;
+    }
+
+    .container-projetos {
+        gap: 10px;
+    }
+
+    .task-info {
+        font-size: 0.8em;
+    }
+}
+
+/* Ajustes no Container de Projetos */
+.container-projetos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+

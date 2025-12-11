@@ -1,0 +1,43 @@
+{% include 'components/header.html' with title='Projetos DITEC' ver_projeto=True %}
+
+<style>
+    .input-group {
+        width: 100%;  /* Define 100% da largura disponível */
+        width: 25rem; /* Você pode definir um valor máximo, se necessário */
+    }
+    .input-group .btn {
+        width: 20%; /* Ajuste a largura do botão, se necessário */
+    }
+</style>
+<body>
+    {% include 'components/navbar.html' %}
+    <h1 class='text-center'>Projetos</h1>
+
+    <!-- Formulário de Busca -->
+    <div class="container mb-4">
+        <form method="get" action="{% url 'ver_projetos' %}">
+            <div class="input-group">
+                <input type="text" class="form-control" name="q" placeholder="Buscar por nome ou processo SEI" value="{{ request.GET.q }}">
+                <button class="btn btn-success" type="submit">Buscar</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="container container-projetos content">
+
+        {% for projeto in projetos %}
+        
+            <span>{{ projeto.nome }}</span>
+            {% include 'components/caixa_projetos.html' with nome=projeto.nome_projeto id=projeto.id_projeto tasks_feitas=projeto.tasks_feitas total_tasks=projeto.total_tasks %}
+        {% empty %}
+            <span>Nenhum projeto encontrado.</span>
+        {% endfor %}
+        
+
+    </div>
+
+    {% include 'components/footer.html' %}
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>

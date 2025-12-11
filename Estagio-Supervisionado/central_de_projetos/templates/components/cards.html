@@ -1,0 +1,7 @@
+<div class="kanban-card" id="{{ task.id_tarefa }}" draggable="true" ondragstart="drag(event)" data-status="{{ task.id_status.nome_status }}">
+    <h6 class="task-title">{{ task.nome_tarefa }}</h6>
+    <p class="priority {{ task.id_prioridade.nome_prioridade|lower }}">Prioridade: {{ task.id_prioridade.nome_prioridade }}</p>
+    <p>Início: {{ task.data_inicio }}</p>
+    <p>Limite: {{ task.data_fim }}</p>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#documentosModal" onclick="showTaskDetails({{ task.id_tarefa }})">Descrição</button>
+</div>

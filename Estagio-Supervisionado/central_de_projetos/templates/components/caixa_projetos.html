@@ -1,0 +1,11 @@
+<a href="{% url 'descricao_projeto' id %}" class="card-link">
+
+    <div class="card-projeto">
+        <span>{{nome}}</span>
+        <div class="task-info">
+            <span class="task-label">Tasks</span>
+            <span class="task-value">{{tasks_feitas}}/{{total_tasks}}</span>
+        </div>
+    </div>
+</a>
+

@@ -1,0 +1,174 @@
+/* ===========Styles Configurações Gerais=========== */
+html,
+body {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  text-align: center;
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
+.container h4 {
+  margin-bottom: -10px;
+  margin-top: -8px;
+}
+
+.navbar a:hover {
+  cursor: pointer;
+}
+
+.title {
+  margin-top: 500px;
+}
+
+.title h1,
+h4 {
+  text-align: center;
+}
+
+.cadastro-box {
+  border: 1px solid #606060;
+  border-radius: 1rem;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 5px;
+}
+
+.btn-large {
+  width: 200px;
+  height: 60px;
+  background-color: #782028;
+  color: #ffffff;
+  border: 0;
+}
+
+.btn-large:hover {
+  background-color: #9f1520;
+}
+
+.btn {
+  background-color: #782028;
+  color: #ffffff;
+  border: 0;
+}
+
+.btn-primary:hover {
+  background-color: #9f1520;
+}
+
+.btn-projeto-save {
+  background-color: #009951;
+}
+
+.btn-projeto-save:hover {
+  background-color: #00d270;
+}
+
+.texto {
+  margin-bottom: 20px;
+}
+
+.same-height {
+  min-height: 250px; 
+}
+
+/* ===========Navbar=========== */
+.navbar {
+  background-color: #782028;
+}
+
+.navbar {
+  background-color: #782028;
+}
+
+.navbar-brand {
+  margin-left: 8rem;
+}
+
+.navbar-nav .nav-link {
+    border-radius: 2rem;
+    padding: 0.75rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.5s ease, border-radius 0.5s ease; 
+  }
+
+  .navbar-nav .nav-link:hover {
+    text-decoration: none;
+    transform: translateY(-5px); 
+    border-radius: 1.5rem; 
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+
+/* ===========Footer=========== */
+.footer {
+  background-color: #782028;
+  font-size: small;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+  margin-top: auto;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .navbar-brand, .user-dropdown {
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+  
+  .cadastro-box {
+    padding: 15px;
+  }
+
+  .btn-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .btn-large {
+    width: 100%;
+    max-width: 250px;
+    height: 50px;
+  }
+}
+
+@media (max-width: 576px) {
+  .container {
+    padding: 0 15px;
+  }
+
+  .cadastro-box {
+    border: none;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 0;
+  }
+
+  .btn-large {
+    width: 100%;
+    height: 45px;
+    font-size: 0.9rem;
+  }
+
+  .navbar-brand, .user-dropdown {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+  }
+}
+.content {
+    margin-top: 30px;
+    margin-bottom: 10px;
+    padding: 20px;
+    height: calc(100vh - 180px);
+    overflow-y: auto;
+    scrollbar-width: none;
+}

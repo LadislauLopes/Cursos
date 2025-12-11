@@ -1,0 +1,54 @@
+{% load static %}
+<nav class="navbar navbar-dark bg-dark fixed-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" onclick="location.href='/home_page/'">
+            <i class="bi bi-key-fill m-2"></i>
+            KeyArena
+        </a>
+        <div class="dropdown">
+            <div class="avatar" id="avatarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                {% if request.user.is_authenticated %}
+                    {% if request.user.foto_perfil %}
+                        <img src="{{ request.user.foto_perfil.url }}" alt="Foto de Perfil" class="img-thumbnail">
+                    {% else %}
+                        <img src="{% static 'images/default_avatar.png' %}" alt="Foto de Perfil Padrão" class="img-thumbnail">
+                    {% endif %}
+                {% else %}
+                    <img src="{% static 'images/default_avatar.png' %}" alt="Foto de Perfil Padrão" class="img-thumbnail">
+                {% endif %}
+            </div>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="avatarDropdown">
+                {% if request.user.is_authenticated %}
+                    <li><a class="dropdown-item" onclick="location.href='/home_page/'">Menu Principal</a></li>
+                    <li><a class="dropdown-item" onclick="location.href='/perfil'">Perfil</a></li>
+                    <li><a class="dropdown-item" href="#">Configurações</a></li>
+                    <li><hr class="dropdown-divider" /></li>
+                    <li>
+                        <a class="dropdown-item flex-fill me-2" data-bs-toggle="modal" data-bs-target="#exitModal">Sair do Sistema</a>
+                    </li>
+                {% else %}
+                    <li><a class="dropdown-item" onclick="location.href='/login'">Login</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Modal para confirmação de saída -->
+<div class="modal fade" id="exitModal" tabindex="-1" aria-labelledby="exitModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exitModalLabel">Confirmar Saída</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Você realmente deseja sair do sistema?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <a class="btn btn-danger flex-fill me-2" href="/sair">Sair</a>
+            </div>
+        </div>
+    </div>
+</div>

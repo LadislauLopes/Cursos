@@ -1,0 +1,10 @@
+.login {
+    margin-top: 1rem;
+    background-color: #782028;
+    border: none;
+}
+
+.login:hover {
+    background-color: #9f1520;
+}
+

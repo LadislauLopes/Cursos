@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    {% include 'components/head.html' with title='KeyArena' %}
+</head>
+
+<body>
+
+    {% include 'components/navbar.html' %}
+
+
+
+<main class='content'>
+
+    <div class="container1">
+        <div class="table-container">
+            <h1 class="text-center">Torneios Ativos</h1>
+            <input type="text" id="filterInput" placeholder="Buscar Torneio" class="form-control mb-3" style="width: 240px;">
+            <table class="table table-striped" id="table1">
+                <thead>
+                    <tr>
+                        <th>Nome do Torneio</th>
+                        <th>Modalidade</th>
+                        <th>Participantes</th>
+                        <th>Status</th>
+                        <th>Data de início</th>
+
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="tournamentTable">
+                    {% for torneio in torneios %}
+                    <tr>
+                        <td>{{ torneio.tor_nome_torneio }}</td>
+                        <td>{{ torneio.tor_tipo_torneio.ttor_tipo }}</td>
+                        <td>
+                                 ({{ torneio.num_inscritos }} / {{ torneio.tor_quant_participantes }})
+                        </td>
+                        <td>
+                        {% if torneio.tor_ativo %}
+                            Ativo
+                        {% else %}
+                            Finalizado
+                        {% endif %}
+                        </td>
+                        <td>{{ torneio.tor_data_inicio|date:"d/m/Y" }}</td>
+                        <td>
+
+                            <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#descriptionModal{{ torneio.tor_id }}">Detalhes</button>
+                        </td>
+                        <td>
+                            {% if torneio.tor_id not in inscricoes_dict %}
+                                {% if torneio.num_inscritos < torneio.tor_quant_participantes %}
+                                    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#participateModal{{ torneio.tor_id }}">Participar</button>
+                                {% else %}
+                                    <button class="btn btn-secondary" disabled>Torneio cheio</button>
+                                {% endif %}
+                            {% else %}
+                                <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#alreadyRegisteredModal{{ torneio.tor_id }}">Já Inscrito</button>
+                            {% endif %}
+                        </td>
+                        
+                    </tr>
+
+                    <!-- Modal para Detalhes -->
+
+                    <div class="modal fade" id="descriptionModal{{ torneio.tor_id }}" tabindex="-1" aria-labelledby="descriptionModal{{ torneio.tor_id }}Label" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="descriptionModal{{ torneio.tor_id }}Label">Detalhes sobre {{ torneio.tor_nome_torneio }}</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Descrição: {{ torneio.tor_descricao }}.<br>
+                                    Data de início: {{ torneio.tor_data_inicio|date:"d/m/Y" }}.
+                                </div>
+                                <div class="modal-footer">
+
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Modal para Participar -->
+                    <div class="modal fade" id="participateModal{{ torneio.tor_id }}" tabindex="-1" aria-labelledby="participateModal{{ torneio.tor_id }}Label" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="participateModal{{ torneio.tor_id }}Label">Inscrição no Torneio {{ torneio.tor_nome_torneio }}</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Deseja confirmar a sua participação no torneio <strong>{{ torneio.tor_nome_torneio }}</strong>?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <form action="{% url 'inscricao' torneio.tor_id %}" method="post">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-success">Confirmar Participação</button>
+                                    </form>
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Modal para aviso de já inscrito -->
+                    <div class="modal fade" id="alreadyRegisteredModal{{ torneio.tor_id }}" tabindex="-1" aria-labelledby="alreadyRegisteredModal{{ torneio.tor_id }}Label" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="alreadyRegisteredModal{{ torneio.tor_id }}Label">Você já está inscrito em {{ torneio.tor_nome_torneio }}</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Você já está inscrito em <strong>{{ torneio.tor_nome_torneio }}</strong>.</p>
+                                    <p>Veja os torneios que você está inscrito na sua página de inscrições</p>
+                                </div>
+                                <div class="modal-footer d-flex justify-content-between">
+                                    <a id="botao_ir_inscricoes" class="btn btn-primary flex-fill me-2" href="{% url 'torneios' %}?from_participar=true">Ir para suas Inscrições</a>
+                                    <button type="button" class="btn btn-danger flex-fill" data-bs-dismiss="modal">Fechar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+
+    {% include 'components/footer.html' %}
+
+    <script src="https://kit.fontawesome.com/eb67357ef4.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous">
+    </script>
+    <script>
+        document.getElementById('filterInput').addEventListener('keyup', function() {
+            const filter = this.value.toLowerCase();
+            const rows = document.querySelectorAll('#tournamentTable tr');
+
+            rows.forEach(row => {
+                const cells = row.getElementsByTagName('td');
+                const nomeTorneio = cells[0].textContent.toLowerCase();
+                const modalidade = cells[1].textContent.toLowerCase();
+
+                if (nomeTorneio.includes(filter) || modalidade.includes(filter)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+        
+    </script>
+</body>
+</html>
+
+
+
+
+
+  

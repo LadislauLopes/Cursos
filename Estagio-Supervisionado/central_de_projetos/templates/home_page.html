@@ -1,0 +1,26 @@
+{% include 'components/header.html' with title='Projetos DITEC' home_page=True %}
+
+<body>
+    {% include 'components/navbar.html' %}
+
+    <div class="container cad">
+        <h1>Bem Vindo, {{ user.nome }}!</h1>
+        <h6>Gerencie seus projetos</h6>
+        <div class="btn-container">
+            {% if user.is_superuser %}
+                {% include 'components/button.html' with text='Criar Projetos' text2='Criar' url='/criar_projetos/' %}
+                {% include 'components/button.html' with text='Designar Equipe' text2='Designar' url='/cad_equipe/' %}
+                {% include 'components/button.html' with text='Cadastro de Colaborador' text2='Cadastrar' url='/cad_colaborador/' %}
+                {% include 'components/button.html' with text='Dashboard' text2='Ver' url='/dashboard' %}
+            {% endif %}
+            {% include 'components/button.html' with text='Cadastro de Tarefas' text2='Cadastrar' url='/cad_tarefa/' %}
+            {% include 'components/button.html' with text='Equipe Tarefa' text2='Cadastrar' url='/cad_tarefa_equipe/' %}
+            {% include 'components/button.html' with text='Ver Projetos' text2='Ver' url='/ver_projetos/' %}
+        </div>
+    </div>
+
+    {% include 'components/footer.html' %}
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>

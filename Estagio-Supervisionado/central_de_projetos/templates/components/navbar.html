@@ -1,0 +1,52 @@
+{% load static %}
+
+<nav class="navbar navbar-light">
+  <!-- Logo -->
+  <a class="navbar-brand" href="/home_page/">
+    <img src="{% static 'global/images/logo.svg' %}" width="140" height="50" class="d-inline-block align-top" alt="logo" />
+  </a>
+  <div class="ms-auto">  <!-- Adicionando 'ms-auto' para alinhar à direita -->
+    <ul class="navbar-nav d-flex flex-row">
+        {% if request.user.is_authenticated %}
+            <li class="nav-item me-4"> <!-- Adicionando 'me-4' para espaçamento -->
+                <a class="nav-link text-light" href="{% url 'home_page' %}">
+                  <i class="bi bi-house-door-fill me-2"></i>Menu Principal
+                </a>
+            </li>
+            <li class="nav-item me-4">
+              <a class="nav-link text-light" href="#">
+                <i class="bi bi-person-circle user-icon"></i>{{user.nome}}
+              </a>
+          </li>
+          <li class="nav-item me-4">
+            <a class="nav-link text-light" data-bs-toggle="modal" data-bs-target="#exitModal">
+              <i class="bi bi-box-arrow-right me-2"></i>Sair do Sistema
+            </a>
+        </li>
+        {% else %}
+            <li class="nav-item me-4"> <!-- Adicionando 'me-4' para espaçamento -->
+                <a class="nav-link" onclick="location.href='/'">Login</a>
+            </li>
+        {% endif %}
+    </ul>
+</div>
+</nav>
+
+<!-- Modal para confirmação de saída -->
+<div class="modal fade" id="exitModal" tabindex="-1" aria-labelledby="exitModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="exitModalLabel">Confirmar Saída</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              Você realmente deseja sair do sistema?
+          </div>
+          <div class="modal-footer d-flex">
+            <a class="btn btn-danger w-100 ms-1" href="{% url 'sair' %}" role="button">Sair</a>
+            <button type="button" class="btn btn-primary w-100" data-bs-dismiss="modal">Cancelar</button>
+          </div>
+      </div>
+  </div>
+</div>
