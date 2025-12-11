@@ -1,0 +1,4 @@
+/venv/
+*.pt
+.env
+/mascarilla_con_sin_incorrecta-10/

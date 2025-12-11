@@ -1,0 +1,29 @@
+source: O caminho para a imagem, vídeo ou webcam. Pode ser um arquivo local ou uma URL.
+
+show: Se deve ou não mostrar a imagem/resultado em uma janela. (True ou False)
+
+save: Se deve salvar a saída (imagens ou vídeos) no diretório padrão. (True ou False)
+
+save_txt: Se deve salvar as detecções em um arquivo de texto. (True ou False)
+
+save_conf: Se deve salvar a confiança das detecções no arquivo de texto. (True ou False)
+
+project: O nome do projeto/diretório onde os resultados devem ser salvos. (por exemplo, 'runs/detect')
+
+name: Nome da subpasta dentro do diretório do projeto para salvar os resultados.
+
+exist_ok: Se deve sobrescrever os arquivos existentes. (True ou False)
+
+device: O dispositivo onde o modelo deve ser executado (por exemplo, 'cpu', '0', 'cuda:0' para GPU).
+
+imgsz: Tamanho da imagem para redimensionamento antes da inferência. Pode ser um número inteiro (ex: 640) ou uma lista (ex: [640, 640]).
+
+conf: O limiar de confiança para filtrar detecções. Por padrão, é 0.25.
+
+iou: O limiar de IoU (Intersection over Union) para filtragem de detecções. Por padrão, é 0.45.
+
+line_thickness: A espessura das linhas das caixas delimitadoras.
+
+hide_labels: Se deve ocultar os rótulos das classes nas detecções. (True ou False)
+
+hide_conf: Se deve ocultar as confidências nas detecções. (True ou False)

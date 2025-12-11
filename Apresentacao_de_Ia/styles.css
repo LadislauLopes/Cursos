@@ -1,0 +1,28 @@
+h1 {
+  color: brown;
+  text-align: center;
+}
+
+div {
+  align-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.achado {
+  background-color: green;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0% {
+    background-color: green;
+  }
+  50% {
+    background-color: transparent;
+  }
+  100% {
+    background-color: green;
+  }
+}
