@@ -1,0 +1,24 @@
+** Instalação
+
+docker compose -f docker-compose.secure.yml up -d
+
+** Matrícula kibana:
+
+docker exec -it elasticsearch bin/elasticsearch-create-enrollment-token -s kibana
+
+
+** Código de verificação:
+
+- docker logs kibana
+
+ou 
+
+- docker exec -it kibana bin/kibana-verification-code
+
+** Alterar a senha por uma senha automática
+
+docker exec -it elasticsearch bin/elasticsearch-reset-password -u elastic
+
+** Alterar a senha por uma senha própria:
+
+docker exec -it elasticsearch bin/elasticsearch-reset-password -u elastic -i
