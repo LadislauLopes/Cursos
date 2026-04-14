@@ -2,6 +2,27 @@
 
 docker compose -f docker-compose.secure.yml up -d
 
+Observação importante:
+- O comando de matrícula do Kibana funciona apenas no ambiente seguro (docker-compose.secure.yml).
+- No ambiente dev (docker-compose.dev.yml), a segurança está desativada e o token não é gerado.
+- No dev, os nomes dos containers são elasticsearch-dev e kibana-dev.
+
+** Como gerar o enrollment token (Kibana)
+
+1) Subir o ambiente seguro:
+
+docker compose -f docker-compose.secure.yml up -d
+
+2) Gerar o token no Elasticsearch:
+
+docker exec -it elasticsearch bin/elasticsearch-create-enrollment-token -s kibana
+
+3) (Opcional) obter o código de verificação do Kibana:
+
+docker exec -it kibana bin/kibana-verification-code
+
+4) Abrir http://localhost:5601 e colar o token.
+
 ** Matrícula kibana:
 
 docker exec -it elasticsearch bin/elasticsearch-create-enrollment-token -s kibana
